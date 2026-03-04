@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "c0RA/1PaXmo=",
+  "dgSpecHash": "oUeHd+6GPuQ=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
+  "projectFilePath": "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.3\\microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
-    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0\\microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0\\microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.0\\microsoft.entityframeworkcore.analyzers.9.0.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\9.0.0\\microsoft.entityframeworkcore.relational.9.0.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512",
+    "C:\\Users\\Caleb\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512"
   ],
   "logs": []
 }

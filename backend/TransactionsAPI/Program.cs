@@ -4,6 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddDbContext<TransactionsAPI.Data.TransactionsDbContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
 builder.Services.AddScoped<TransactionsAPI.Repositories.ITransactionRepository, TransactionsAPI.Repositories.TransactionRepository>();
 builder.Services.AddScoped<TransactionsAPI.Services.ITransactionService, TransactionsAPI.Services.TransactionService>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

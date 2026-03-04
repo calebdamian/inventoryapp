@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj": {}
+    "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj": {
+    "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
         "projectName": "ProductsAPI",
-        "projectPath": "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
+        "projectPath": "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\ProductsAPI.csproj",
         "packagesPath": "C:\\Users\\Caleb\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\obj\\",
+        "outputPath": "C:\\Users\\Caleb\\Documents\\Proyectos\\Ev. tecnica CN\\backend\\ProductsAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Caleb\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.3, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
