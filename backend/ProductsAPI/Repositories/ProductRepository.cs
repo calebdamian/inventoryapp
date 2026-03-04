@@ -1,45 +1,63 @@
+using Microsoft.EntityFrameworkCore;
+using ProductsAPI.Data;
 using ProductsAPI.Models;
 
 namespace ProductsAPI.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly List<Product> _products = new();
+    private readonly ProductsDbContext _context;
 
-    public Task<IEnumerable<Product>> GetAllAsync()
+    public ProductRepository(ProductsDbContext context)
     {
-        return Task.FromResult<IEnumerable<Product>>(_products);
+        _context = context;
     }
 
-    public Task<Product?> GetByIdAsync(Guid id)
+    public async Task<IEnumerable<Product>> GetAllAsync()
     {
-        var product = _products.FirstOrDefault(p => p.Id == id);
-        return Task.FromResult(product);
+        return await _context.Products.AsNoTracking().ToListAsync();
     }
 
-    public Task AddAsync(Product product)
+    public async Task<Product?> GetByIdAsync(Guid id)
     {
-        _products.Add(product);
-        return Task.CompletedTask;
+        return await _context.Products
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task UpdateAsync(Product product)
+    public async Task AddAsync(Product product)
     {
-        var existingIndex = _products.FindIndex(p => p.Id == product.Id);
-        if (existingIndex != -1)
-        {
-            _products[existingIndex] = product;
-        }
-        return Task.CompletedTask;
+        await _context.Products.AddAsync(product);
+        await _context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(Guid id)
+    public async Task UpdateAsync(Product product)
     {
-        var product = _products.FirstOrDefault(p => p.Id == id);
-        if (product != null)
-        {
-            _products.Remove(product);
-        }
-        return Task.CompletedTask;
+        var existingProduct = await _context.Products
+            .FirstOrDefaultAsync(p => p.Id == product.Id);
+
+        if (existingProduct == null)
+            throw new KeyNotFoundException("Product not found");
+
+        existingProduct.Name = product.Name;
+        existingProduct.Description = product.Description;
+        existingProduct.Category = product.Category;
+        existingProduct.Image = product.Image;
+        existingProduct.Price = product.Price;
+        existingProduct.Stock = product.Stock;
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        var product = await _context.Products
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (product == null)
+            return;
+
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
     }
 }

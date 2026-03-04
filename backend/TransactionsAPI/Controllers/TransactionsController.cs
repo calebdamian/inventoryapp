@@ -29,4 +29,4 @@ public class TransactionsController : ControllerBase
         var transactions = await _transactionService.GetByProductAsync(productId);
         return Ok(transactions);
     }
-}
+}d

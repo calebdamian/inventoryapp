@@ -1,20 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+using TransactionsAPI.Data;
 using TransactionsAPI.Models;
 
 namespace TransactionsAPI.Repositories;
 
 public class TransactionRepository : ITransactionRepository
 {
-    private readonly List<Transaction> _transactions = new();
+    private readonly TransactionsDbContext _context;
 
-    public Task AddAsync(Transaction transaction)
+    public TransactionRepository(TransactionsDbContext context)
     {
-        _transactions.Add(transaction);
-        return Task.CompletedTask;
+        _context = context;
     }
 
-    public Task<IEnumerable<Transaction>> GetByProductIdAsync(Guid productId)
+    public async Task AddAsync(Transaction transaction)
     {
-        var result = _transactions.Where(t => t.ProductId == productId);
-        return Task.FromResult(result);
+        await _context.Transactions.AddAsync(transaction);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<Transaction>> GetByProductIdAsync(Guid productId)
+    {
+        return await _context.Transactions
+            .AsNoTracking()
+            .Where(t => t.ProductId == productId)
+            .OrderByDescending(t => t.Date)
+            .ToListAsync();
     }
 }
