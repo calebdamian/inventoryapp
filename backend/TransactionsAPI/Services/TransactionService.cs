@@ -35,4 +35,9 @@ public class TransactionService : ITransactionService
     {
         return await _repository.GetByProductIdAsync(productId);
     }
+
+    public async Task<PagedResult<Transaction>> GetPagedAsync(int pageNumber, int pageSize, string? type, DateTime? startDate, DateTime? endDate)
+    {
+        return await _repository.GetPagedAsync(pageNumber, pageSize, type, startDate, endDate);
+    }
 }

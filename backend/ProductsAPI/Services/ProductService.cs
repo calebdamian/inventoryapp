@@ -13,9 +13,9 @@ public class ProductService : IProductService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<PagedResult<Product>> GetPagedAsync(int pageNumber, int pageSize, string? search, string? category, decimal? minPrice, decimal? maxPrice)
     {
-        return await _repository.GetAllAsync();
+        return await _repository.GetPagedAsync(pageNumber, pageSize, search, category, minPrice, maxPrice);
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)

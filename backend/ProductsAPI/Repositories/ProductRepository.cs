@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProductsAPI.Data;
 using ProductsAPI.Models;
+using ProductsAPI.DTOs;
 
 namespace ProductsAPI.Repositories;
 
@@ -13,9 +14,43 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
+    public async Task<PagedResult<Product>> GetPagedAsync(int pageNumber, int pageSize, string? search, string? category, decimal? minPrice, decimal? maxPrice)
     {
-        return await _context.Products.AsNoTracking().ToListAsync();
+        var query = _context.Products.AsNoTracking().AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var searchLower = search.ToLower();
+            query = query.Where(p => p.Name.ToLower().Contains(searchLower) || (p.Description != null && p.Description.ToLower().Contains(searchLower)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            var categoryLower = category.ToLower();
+            query = query.Where(p => p.Category.ToLower().Contains(categoryLower));
+        }
+
+        if (minPrice.HasValue)
+            query = query.Where(p => p.Price >= minPrice.Value);
+
+        if (maxPrice.HasValue)
+            query = query.Where(p => p.Price <= maxPrice.Value);
+
+        var totalCount = await query.CountAsync();
+
+        var items = await query
+            .OrderByDescending(p => p.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<Product>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)
